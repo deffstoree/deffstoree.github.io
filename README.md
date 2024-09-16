@@ -1,57 +1,77 @@
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paket Siluman - Pembelian</title>
     <style>
+        /* Menghilangkan scroll horizontal */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
-            padding-bottom: 60px; /* Ruang tambahan di bawah konten untuk footer */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Mencegah scroll horizontal */
         }
+
         header {
             background-color: #4CAF50;
             color: white;
-            padding: 20px;
+            padding: 10px;
             text-align: center;
+            width: 100%;
+            box-sizing: border-box;
         }
+        
         .container {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 10px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
+            margin-top: 10px;
+            flex: 1;
+            box-sizing: border-box; /* Memastikan padding di dalam batas */
         }
-        h1 {
-            font-size: 24px;
+        
+        h1, h2 {
+            font-size: 1.2rem;
             margin-bottom: 10px;
+            text-align: center;
         }
-        h2 {
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
+        
         form {
-            max-width: 600px;
+            max-width: 100%;
             margin: auto;
         }
+        
         label {
             display: block;
             margin-top: 10px;
             font-weight: bold;
+            font-size: 0.9rem;
         }
+        
         input, select, button {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
-            font-size: 16px;
+            font-size: 14px;
             border-radius: 4px;
             border: 1px solid #ddd;
+            box-sizing: border-box;
         }
+
+        input[readonly] {
+            background-color: #e9e9e9; /* Warna latar belakang untuk input non-editable */
+            color: #555; /* Warna teks untuk input non-editable */
+        }
+
         button {
             background-color: #4CAF50;
             color: white;
@@ -59,73 +79,187 @@
             cursor: pointer;
             margin-top: 10px;
         }
+        
         button:hover {
             background-color: #45a049;
         }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            width: 30%; /* Ukuran tombol disesuaikan agar sejajar */
+        }
+
         .error {
             color: red;
             margin-top: 5px;
+            font-size: 0.8rem;
         }
+        
         .total {
             font-weight: bold;
             margin-top: 10px;
+            font-size: 1rem;
         }
+        
         .harga-coret {
             text-decoration: line-through;
             color: red;
             margin-right: 10px;
         }
-        #pembayaranSection {
-            display: none; /* Tersembunyi hingga form dikirim */
+        
+        #pembayaranSection, #pembayaranSectionPaket {
+            display: none;
             margin-top: 20px;
         }
-        #pembayaranSection img {
+        
+        #pembayaranSection img, #pembayaranSectionPaket img {
             width: 100%;
-            max-width: 300px;
+            max-width: 100%;
             margin-bottom: 10px;
         }
-        #whatsappButton {
+        
+        #whatsappButton, #whatsappButtonPaket {
             margin-top: 10px;
-            background-color: #25d366; /* Warna khas WhatsApp */
+            background-color: #25d366;
             border: none;
+            padding: 10px;
         }
-        #whatsappButton:hover {
+        
+        #whatsappButton:hover, #whatsappButtonPaket:hover {
             background-color: #1ebe57;
         }
-        .placeholder {
-            color: #aaa;
-        }
-        .instructions {
-            margin-top: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: #fafafa;
-        }
-        .app-info {
+        
+        .instructions, .app-info {
             margin-top: 20px;
             padding: 15px;
             border: 1px solid #ddd;
             border-radius: 4px;
             background-color: #f9f9f9;
+            font-size: 0.9rem;
         }
+
+        .app-info img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-left: 5px; /* Jarak antara teks dan gambar */
+        }
+
         footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
             background-color: rgba(0, 0, 0, 0.8);
             color: white;
             text-align: center;
-            padding: 5px;
-            font-size: 8px;
+            padding: 10px;
+            font-size: 12px;
             border-top: 1px solid #ddd;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-sizing: border-box;
         }
+
         footer a {
-            color: #00C851; /* Warna tautan yang kontras */
+            color: #00C851;
             text-decoration: none;
         }
+
         footer a:hover {
             text-decoration: underline;
+        }
+
+        /* Modal Styles */
+        #modalHWID, #modalHarga, #modalBeli, #modalBeliPaket {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0, 0, 0, 0.4); 
+        }
+
+        #modalContent, #modalContentHarga, #modalContentBeli, #modalContentBeliPaket {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        #closeModal, #closeModalHarga, #closeModalBeli, #closeModalBeliPaket {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        #closeModal:hover, #closeModal:focus, #closeModalHarga:hover, #closeModalHarga:focus, #closeModalBeli:hover, #closeModalBeli:focus, #closeModalBeliPaket:hover, #closeModalBeliPaket:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-section {
+            margin-bottom: 20px;
+        }
+
+        .modal-section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-section p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .modal-section ul li {
+            background-color: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .images-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 10px;
+        }
+
+        .images-container img {
+            width: 120px;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (min-width: 600px) {
+            .container {
+                max-width: 500px;
+            }
+            h1, h2 {
+                font-size: 1.5rem;
+            }
+            input, select, button {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -138,6 +272,7 @@
     <div class="container">
         <h2>Pembelian Server Siluman</h2>
 
+        <!-- Form Pembelian Server -->
         <form id="hwidForm">
             <label for="nama">Nama (tanpa spasi):</label>
             <input type="text" id="nama" name="nama" placeholder="Masukkan username" required>
@@ -177,6 +312,10 @@
                 <option value="12">12 Bulan (Diskon 17%)</option>
             </select>
 
+            <!-- Kolom Kartu Perdana (Non-editable) -->
+            <label for="kartuPerdana">Kartu Perdana:</label>
+            <input type="text" id="kartuPerdana" name="kartuPerdana" value="TELKOMSEL" readonly>
+
             <div class="total">
                 Total Harga: <span id="totalHarga"></span>
             </div>
@@ -205,16 +344,14 @@
             <p>Tanggal Pembelian: <span id="tanggalPembelian"></span></p>
             <p>Masa Berakhir: <span id="masaBerakhir"></span></p>
 
-            <!-- Tombol Kirim ke WhatsApp -->
             <button id="whatsappButton">Kirim ke WhatsApp</button>
         </div>
 
-        <!-- Penjelasan Cara Pembelian -->
         <div class="instructions">
             <h3>Cara Pembelian</h3>
             <ol>
                 <li><strong>Isi Formulir:</strong> Masukkan nama (tanpa spasi), kode HWID, pilih platform, server, dan durasi paket yang diinginkan.</li>
-                <li><strong>Klik "Kirim & Beli":</strong> Setelah mengisi formulir, klik tombol "Kirim & Beli" untuk melanjutkan ke halaman pembayaran.</li>
+                <li><strong>Klik "Lanjutkan Pembayaran":</strong> Setelah mengisi formulir, klik tombol "Lanjutkan Pembayaran" untuk melanjutkan ke halaman pembayaran.</li>
                 <li><strong>Informasi Pembayaran:</strong> Di halaman pembayaran, Anda akan melihat kode QRIS untuk pembayaran. Pilih bank jika ingin membayar melalui transfer bank.</li>
                 <li><strong>Lakukan Pembayaran:</strong> Scan kode QRIS dengan aplikasi pembayaran Anda atau transfer ke nomor rekening yang tertera.</li>
                 <li><strong>Kirim Konfirmasi:</strong> Klik tombol "Kirim ke WhatsApp" untuk mengirim detail pembelian dan konfirmasi pembayaran melalui WhatsApp.</li>
@@ -222,87 +359,189 @@
             </ol>
         </div>
 
-        <!-- Informasi Aplikasi -->
+        <!-- Tombol Beli Paket Disini -->
+        <button id="btnBeliPaketDisini">Beli Paket Disini</button>
+
         <div class="app-info">
             <h3>Informasi Aplikasi yang Harus Diunduh</h3>
-            <p><strong>Untuk Android:</strong> Unduh aplikasi <a href="https://play.google.com/store/apps/details?id=xyz.easypro.httpcustom" target="_blank">HTTP Custom</a> di Google Play Store.</p>
-            <p><strong>Untuk iOS/iPhone:</strong> Unduh aplikasi <a href="https://apps.apple.com/id/app/v2box-v2ray-client/id6446814690?l=id" target="_blank">V2Box</a> di App Store.</p>
+            <p><strong>Untuk Android:</strong> Unduh aplikasi <a href="https://play.google.com/store/apps/details?id=xyz.easypro.httpcustom" target="_blank">HTTP Custom</a><img src="https://i.ibb.co.com/5rYmX78/unnamed.webp" alt=""> di Google Play Store.</p>
+            <p><strong>Untuk iOS/iPhone:</strong> Unduh aplikasi <a href="https://apps.apple.com/id/app/v2box-v2ray-client/id6446814690?l=id" target="_blank">V2Box</a><img src="https://i.ibb.co.com/drZ6hB2/unnamed.png" alt=""> di App Store.</p>
+        </div>
+
+        <!-- Tombol di bawah halaman -->
+        <div class="button-container">
+            <button type="button" id="btnHWID">Cara Cek HWID/Device ID</button>
+            <button type="button" id="btnBeliPaket">Cara Beli Paket Siluman</button>
+            <button type="button" id="btnHargaPaket">Cek Harga Paket Siluman</button>
+        </div>
+    </div>
+
+    <!-- Modal untuk Cara Cek HWID -->
+    <div id="modalHWID">
+        <div id="modalContent">
+            <span id="closeModal">&times;</span>
+            <div class="modal-section">
+                <h2>Cara Cek HWID/Device ID</h2>
+                <p><strong>Untuk HTTP Custom:</strong> Buka aplikasi, klik garis tiga di pojok kiri atas, scroll ke bawah, klik HWID, lalu klik salin. Tempelkan kode di kolom Kode HWID / Device ID. Seperti pada gambar berikut:</p>
+                <div class="images-container">
+                    <img src="https://i.ibb.co.com/drZ6hB2/unnamed.png" alt="Langkah 1 HTTP Custom">
+                    <img src="https://example.com/gambar2.jpg" alt="Langkah 2 HTTP Custom">
+                    <img src="https://example.com/gambar3.jpg" alt="Langkah 3 HTTP Custom">
+                    <img src="https://example.com/gambar4.jpg" alt="Langkah 4 HTTP Custom">
+                </div>
+                <p><strong>Untuk V2Box:</strong> Buka aplikasi, klik pengaturan, lalu klik tombol salin di samping kodenya. Tempelkan kode di kolom Kode HWID / Device ID. Seperti pada gambar berikut:</p>
+                <div class="images-container">
+                    <img src="https://example.com/gambar5.jpg" alt="Langkah 1 V2Box">
+                    <img src="https://example.com/gambar6.jpg" alt="Langkah 2 V2Box">
+                    <img src="https://example.com/gambar7.jpg" alt="Langkah 3 V2Box">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal untuk Cek Harga Paket -->
+    <div id="modalHarga">
+        <div id="modalContentHarga">
+            <span id="closeModalHarga">&times;</span>
+            <div class="modal-section">
+                <h2>Daftar Harga Paket Siluman</h2>
+                <ul>
+                    <li>1 GB / 1 Hari: Rp1.100 + admin Rp1.900</li>
+                    <li>10 GB / 1 Hari: Rp3.300 + admin Rp1.700</li>
+                    <li>5 GB / 3 Hari: Rp3.300 + admin Rp1.700</li>
+                    <li>11 GB / 3 Hari: Rp5.500 + admin Rp1.500</li>
+                    <li>17 GB / 3 Hari: Rp7.700 + admin Rp2.300</li>
+                    <li>11 GB / 7 Hari: Rp9.300 + admin Rp1.700</li>
+                    <li>17 GB / 7 Hari: Rp11.500 + admin Rp1.500</li>
+                    <li>28 GB / 7 Hari: Rp13.100 + admin Rp1.900</li>
+                    <li>11 GB / 30 Hari: Rp25.000 + admin Rp2.000</li>
+                    <li>22 GB / 30 Hari: Rp40.000 + admin Rp2.000</li>
+                    <li>30 GB / 30 Hari: Rp50.000 (tanpa admin)</li>
+                </ul>
+                <p><strong>Pembayaran tersedia melalui QRIS atau transfer ke bank pilihan Anda.</strong></p>
+                <p><strong>Spesial:</strong> Pembelian melalui Android hanya Rp10.000/bulan, dan iPhone Rp15.000/bulan.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal untuk Cara Beli Paket -->
+    <div id="modalBeli">
+        <div id="modalContentBeli">
+            <span id="closeModalBeli">&times;</span>
+            <div class="modal-section">
+                <h2>Cara Beli Paket Siluman</h2>
+                <p><strong>Cara 1: Melalui MyTelkomsel:</strong> Buka aplikasi MyTelkomsel, klik beli paket, geser ke kiri, pilih Belajar/Kerja, scroll ke bawah di Pendidikan, dan pilih paket Ketengan Ilmupedia. Seperti gambar berikut:</p>
+                <div class="images-container">
+                    <img src="https://example.com/gambar7.jpg" alt="Langkah 1 MyTelkomsel">
+                    <img src="https://example.com/gambar8.jpg" alt="Langkah 2 MyTelkomsel">
+                    <img src="https://example.com/gambar9.jpg" alt="Langkah 3 MyTelkomsel">
+                    <img src="https://example.com/gambar10.jpg" alt="Langkah 4 MyTelkomsel">
+                    <img src="https://example.com/gambar11.jpg" alt="Langkah 5 MyTelkomsel">
+                </div>
+                <p><strong>Cara 2: Melalui kode *363#:</strong> Ketik *363*844#, pilih Paket Ilmupedia, lalu beli paket sesuai kebutuhan Anda. Seperti gambar berikut:</p>
+                <div class="images-container">
+                    <img src="https://example.com/gambar12.jpg" alt="Langkah 1 Kode USSD">
+                    <img src="https://example.com/gambar13.jpg" alt="Langkah 2 Kode USSD">
+                    <img src="https://example.com/gambar14.jpg" alt="Langkah 3 Kode USSD">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal untuk Pembelian Paket -->
+    <div id="modalBeliPaket">
+        <div id="modalContentBeliPaket">
+            <span id="closeModalBeliPaket">&times;</span>
+            <div class="modal-section">
+                <h2>Pembelian Paket Internet</h2>
+                <form id="paketForm">
+                    <label for="nomorHp">Masukkan Nomor HP:</label>
+                    <input type="text" id="nomorHp" name="nomorHp" placeholder="08xxxxxxxxxx" required>
+
+                    <label for="pilihPaket">Pilih Paket:</label>
+                    <select id="pilihPaket" name="pilihPaket" required>
+                        <option value="" disabled selected>Pilih Paket</option>
+                        <option value="1">1 GB / 1 Hari Rp1.100</option>
+                        <option value="2">10 GB / 1 Hari Rp3.300</option>
+                        <option value="3">5 GB / 3 Hari Rp3.300</option>
+                        <option value="4">11 GB / 3 Hari Rp5.500</option>
+                        <option value="5">17 GB / 3 Hari Rp7.700</option>
+                        <option value="6">11 GB / 7 Hari Rp9.300</option>
+                        <option value="7">17 GB / 7 Hari Rp11.500</option>
+                        <option value="8">28 GB / 7 Hari Rp13.100</option>
+                        <option value="9">11 GB / 30 Hari Rp25.000</option>
+                        <option value="10">22 GB / 30 Hari Rp40.000</option>
+                        <option value="11">30 GB / 30 Hari Rp50.000</option>
+                    </select>
+
+                    <label for="hargaAdmin">Harga Admin:</label>
+                    <input type="text" id="hargaAdmin" name="hargaAdmin" readonly>
+
+                    <div class="total">
+                        Total Harga: <span id="totalHargaPaket"></span>
+                    </div>
+
+                    <button type="submit">Lanjutkan Pembayaran</button>
+                </form>
+
+                <!-- Bagian informasi pembayaran paket -->
+                <div id="pembayaranSectionPaket">
+                    <h3>Informasi Pembayaran</h3>
+                    <p>Scan kode QRIS berikut untuk melakukan pembayaran:</p>
+                    <img src="https://i.ibb.co.com/ZMv88X6/QRIS-SYIFA-PAYMENT.jpg" alt="QRIS Payment">
+                    <p>Pilih metode pembayaran lain:</p>
+                    <label for="bankPaket">Pilih Bank:</label>
+                    <select id="bankPaket" name="bankPaket">
+                        <option value="" disabled selected>Pilih bank pembayaran</option>
+                        <option value="bsi">Bank BSI</option>
+                        <option value="bankjago">Bank Jago</option>
+                        <option value="seabank">SeaBank</option>
+                        <option value="dana">DANA</option>
+                    </select>
+
+                    <p>Nomor Rekening: <span id="rekeningPaket"></span></p>
+
+                    <button id="whatsappButtonPaket">Kirim ke WhatsApp</button>
+                </div>
+            </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2024 Paket Siluman. All rights reserved. | <a href="mailto:info@paketsiluman.com">info@paketsiluman.com</a> | <a href="https://wa.me/6285930313182" target="_blank">WhatsApp: +62 859-3031-3182</a></p>
+        <p>&copy; 2024 Paket Siluman. All rights reserved. <br> <a href="mailto:info@paketsiluman.com">info@paketsiluman.com</a> | <a href="https://wa.me/6285930313182" target="_blank">WhatsApp: +62 859-3031-3182</a></p>
     </footer>
 
     <script>
-        // Fungsi untuk memeriksa validitas nama
-        function isValidUsername(username) {
-            return !/\s/.test(username);
-        }
+        const hargaServer = {
+            "android": { "Singapore": 10000, "Indonesia": 15000 },
+            "ios": { "Singapore": 15000, "Indonesia": 20000 }
+        };
 
-        // Fungsi untuk menghitung total harga berdasarkan platform, server, jumlah bulan, dan diskon
-        function hitungTotalHarga() {
-            let server = document.getElementById('server').value;
-            let bulan = document.getElementById('bulan').value;
-            let platform = document.getElementById('platform').value;
+        const paketHargaAdmin = {
+            "1": { harga: 1100, admin: 1900 },
+            "2": { harga: 3300, admin: 1700 },
+            "3": { harga: 3300, admin: 1700 },
+            "4": { harga: 5500, admin: 1500 },
+            "5": { harga: 7700, admin: 2300 },
+            "6": { harga: 9300, admin: 1700 },
+            "7": { harga: 11500, admin: 1500 },
+            "8": { harga: 13100, admin: 1900 },
+            "9": { harga: 25000, admin: 2000 },
+            "10": { harga: 40000, admin: 2000 },
+            "11": { harga: 50000, admin: 0 },
+        };
 
-            let hargaPerBulan = 0;
+        const bankRekening = {
+            "bsi": "1059536911",
+            "bankjago": "106429349064",
+            "seabank": "901867668250",
+            "dana": "085260600594"
+        };
 
-            if (platform === "android") {
-                if (server === "Singapore") {
-                    hargaPerBulan = 10000; // Harga per bulan untuk Android di Singapore
-                } else if (server === "Indonesia") {
-                    hargaPerBulan = 15000; // Harga per bulan untuk Android di Indonesia
-                }
-            } else if (platform === "ios") {
-                if (server === "Singapore") {
-                    hargaPerBulan = 15000; // Harga per bulan untuk iOS/iPhone di Singapore
-                } else if (server === "Indonesia") {
-                    hargaPerBulan = 20000; // Harga per bulan untuk iOS/iPhone di Indonesia
-                }
-            }
-
-            let hargaSebelumDiskon = hargaPerBulan * bulan;
-            let totalHarga = hargaSebelumDiskon;
-
-            // Diskon 10% untuk 6-11 bulan
-            if (bulan >= 6 && bulan <= 11) {
-                totalHarga *= 0.9; // Diskon 10%
-            }
-
-            // Diskon 17% untuk 12 bulan
-            if (bulan == 12) {
-                totalHarga *= 0.83; // Diskon 17%
-            }
-
-            let totalHargaEl = document.getElementById('totalHarga');
-
-            // Jika ada diskon, tampilkan harga dicoret
-            if (totalHarga < hargaSebelumDiskon) {
-                totalHargaEl.innerHTML = `<span class="harga-coret">Rp ${hargaSebelumDiskon.toLocaleString('id-ID')}</span> Rp ${totalHarga.toLocaleString('id-ID')}`;
-            } else {
-                totalHargaEl.textContent = `Rp ${totalHarga.toLocaleString('id-ID')}`;
-            }
-
-            return totalHarga; // Mengembalikan total harga
-        }
-
-        // Fungsi untuk menghitung tanggal berakhir
-        function hitungTanggalBerakhir(bulan) {
-            let tanggalPembelian = new Date();
-            let tanggalBerakhir = new Date();
-            tanggalBerakhir.setMonth(tanggalPembelian.getMonth() + parseInt(bulan));
-
-            return {
-                tanggalPembelian: tanggalPembelian.toLocaleDateString('id-ID'),
-                tanggalBerakhir: tanggalBerakhir.toLocaleDateString('id-ID')
-            };
-        }
-
-        // Event listener untuk update harga saat platform, server, atau bulan berubah
+        // Fungsi hitung total harga untuk server
         document.getElementById('platform').addEventListener('change', hitungTotalHarga);
         document.getElementById('server').addEventListener('change', hitungTotalHarga);
-        document.getElementById('bulan').addEventListener('change', function() {
+        document.getElementById('bulan').addEventListener('change', function () {
             hitungTotalHarga();
             let bulan = this.value;
             let { tanggalPembelian, tanggalBerakhir } = hitungTanggalBerakhir(bulan);
@@ -310,59 +549,67 @@
             document.getElementById('masaBerakhir').textContent = tanggalBerakhir;
         });
 
-        // Event listener saat tombol form dikirim
-        document.getElementById('hwidForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Mencegah form submit secara default
-
-            let nama = document.getElementById('nama').value;
-            let kodeHwid = document.getElementById('kodeHwid').value;
-            let server = document.getElementById('server').value;
-            let bulan = document.getElementById('bulan').value;
+        function hitungTotalHarga() {
             let platform = document.getElementById('platform').value;
+            let server = document.getElementById('server').value;
+            let bulan = parseInt(document.getElementById('bulan').value);
+            let hargaPerBulan = hargaServer[platform][server];
+            let hargaSebelumDiskon = hargaPerBulan * bulan;
+            let totalHarga = hargaSebelumDiskon;
+
+            // Diskon untuk durasi lebih panjang
+            if (bulan >= 6 && bulan <= 11) {
+                totalHarga *= 0.9;
+            } else if (bulan == 12) {
+                totalHarga *= 0.83;
+            }
+
+            let totalHargaEl = document.getElementById('totalHarga');
+            if (totalHarga < hargaSebelumDiskon) {
+                totalHargaEl.innerHTML = `<span class="harga-coret">Rp ${hargaSebelumDiskon.toLocaleString('id-ID')}</span> Rp ${totalHarga.toLocaleString('id-ID')}`;
+            } else {
+                totalHargaEl.textContent = `Rp ${totalHarga.toLocaleString('id-ID')}`;
+            }
+            return totalHarga;
+        }
+
+        function hitungTanggalBerakhir(bulan) {
+            let tanggalPembelian = new Date();
+            let tanggalBerakhir = new Date();
+            tanggalBerakhir.setMonth(tanggalPembelian.getMonth() + parseInt(bulan));
+            return {
+                tanggalPembelian: tanggalPembelian.toLocaleDateString('id-ID'),
+                tanggalBerakhir: tanggalBerakhir.toLocaleDateString('id-ID')
+            };
+        }
+
+        // Menampilkan nomor rekening sesuai pilihan bank
+        document.getElementById('bank').addEventListener('change', function () {
+            let rekening = bankRekening[this.value];
+            document.getElementById('rekening').textContent = rekening;
+        });
+
+        document.getElementById('hwidForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            let nama = document.getElementById('nama').value;
             let namaError = document.getElementById('namaError');
 
-            // Validasi username agar tidak ada spasi
             if (!isValidUsername(nama)) {
                 namaError.textContent = 'Nama tidak boleh mengandung spasi.';
                 return;
             } else {
-                namaError.textContent = ''; // Hapus pesan error jika valid
+                namaError.textContent = '';
             }
 
-            // Hitung total harga dan tanggal
             hitungTotalHarga();
-            let { tanggalPembelian, tanggalBerakhir } = hitungTanggalBerakhir(bulan);
-            document.getElementById('tanggalPembelian').textContent = tanggalPembelian;
-            document.getElementById('masaBerakhir').textContent = tanggalBerakhir;
-
-            // Tampilkan bagian pembayaran
             document.getElementById('pembayaranSection').style.display = 'block';
         });
 
-        // Event listener untuk menampilkan nomor rekening saat memilih bank
-        document.getElementById('bank').addEventListener('change', function() {
-            let rekening = '';
+        function isValidUsername(username) {
+            return !/\s/.test(username);
+        }
 
-            switch (this.value) {
-                case 'bsi':
-                    rekening = '1059536911';
-                    break;
-                case 'bankjago':
-                    rekening = '106429349064';
-                    break;
-                case 'seabank':
-                    rekening = '901867668250';
-                    break;
-                case 'dana':
-                    rekening = '085260600594';
-                    break;
-            }
-
-            document.getElementById('rekening').textContent = rekening;
-        });
-
-        // Fungsi untuk membuat pesan WhatsApp
-        function buatPesanWhatsApp() {
+        document.getElementById('whatsappButton').addEventListener('click', function () {
             let nama = document.getElementById('nama').value;
             let kodeHwid = document.getElementById('kodeHwid').value;
             let server = document.getElementById('server').value;
@@ -374,11 +621,10 @@
             let tanggalPembelian = document.getElementById('tanggalPembelian').textContent;
             let tanggalBerakhir = document.getElementById('masaBerakhir').textContent;
 
-            // Format pesan yang akan dikirim ke WhatsApp
             let pesan = `*Pembelian Server*\n\n` +
                         `*Nama:* ${nama}\n` +
                         `*Kode HWID / Device ID:* ${kodeHwid}\n` +
-                        `*Platform:* ${platform === "android" ? "Android" : "iOS/iPhone"}\n` +
+                        `*Platform:* ${platform}\n` +
                         `*Server:* ${server}\n` +
                         `*Durasi:* ${bulan} bulan\n` +
                         `*Total Harga:* Rp ${totalHarga.toLocaleString('id-ID')}\n` +
@@ -389,19 +635,128 @@
                         `- ${bank.toUpperCase()} nomor rekening: ${rekening}\n\n` +
                         `Terima kasih!`;
 
-            return pesan;
-        }
+            const nomorWhatsApp = '6285930313182';
+            const url = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesan)}`;
 
-        // Event listener untuk tombol WhatsApp
-        document.getElementById('whatsappButton').addEventListener('click', function() {
-            let nomorWhatsApp = '6285930313182'; // Nomor WhatsApp tujuan (format internasional tanpa tanda '+')
-            let pesan = buatPesanWhatsApp();
-            let url = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesan)}`;
-
-            // Buka WhatsApp
             window.open(url, '_blank');
         });
 
+        // Logika untuk pembelian paket
+        document.getElementById('pilihPaket').addEventListener('change', function () {
+            const selectedPaket = this.value;
+            const hargaPaket = paketHargaAdmin[selectedPaket].harga;
+            const admin = paketHargaAdmin[selectedPaket].admin;
+
+            document.getElementById('hargaAdmin').value = `Rp${admin.toLocaleString('id-ID')}`;
+            document.getElementById('totalHargaPaket').textContent = `Rp${(hargaPaket + admin).toLocaleString('id-ID')}`;
+        });
+
+        document.getElementById('paketForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            document.getElementById('pembayaranSectionPaket').style.display = 'block';
+        });
+
+        document.getElementById('whatsappButtonPaket').addEventListener('click', function () {
+            const nomorHp = document.getElementById('nomorHp').value;
+            const paket = document.getElementById('pilihPaket').options[document.getElementById('pilihPaket').selectedIndex].text;
+            const admin = document.getElementById('hargaAdmin').value;
+            const totalHarga = document.getElementById('totalHargaPaket').textContent;
+
+            const pesanPaket = `*Pembelian Paket Internet*\n\n` +
+                        `*Nomor HP:* ${nomorHp}\n` +
+                        `*Paket:* ${paket}\n` +
+                        `*Harga Admin:* ${admin}\n` +
+                        `*Total Harga:* ${totalHarga}\n\n` +
+                        `Mohon segera lakukan pembayaran.`;
+
+            const nomorWhatsApp = '6285930313182';
+            const urlPaket = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesanPaket)}`;
+
+            window.open(urlPaket, '_blank');
+        });
+
+        // Menampilkan nomor rekening sesuai pilihan bank untuk paket
+        document.getElementById('bankPaket').addEventListener('change', function () {
+            const selectedBank = this.value;
+            const rekening = bankRekening[selectedBank] || 'Nomor rekening tidak tersedia';
+            document.getElementById('rekeningPaket').textContent = rekening;
+        });
+
+        // Script modal untuk Cara Cek HWID
+        var modalHWID = document.getElementById("modalHWID");
+        var btnHWID = document.getElementById("btnHWID");
+        var closeModal = document.getElementById("closeModal");
+
+        btnHWID.onclick = function() {
+            modalHWID.style.display = "block";
+        }
+
+        closeModal.onclick = function() {
+            modalHWID.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modalHWID) {
+                modalHWID.style.display = "none";
+            }
+        }
+
+        // Script modal untuk Cek Harga Paket
+        var modalHarga = document.getElementById("modalHarga");
+        var btnHargaPaket = document.getElementById("btnHargaPaket");
+        var closeModalHarga = document.getElementById("closeModalHarga");
+
+        btnHargaPaket.onclick = function() {
+            modalHarga.style.display = "block";
+        }
+
+        closeModalHarga.onclick = function() {
+            modalHarga.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modalHarga) {
+                modalHarga.style.display = "none";
+            }
+        }
+
+        // Script modal untuk Cara Beli Paket
+        var modalBeli = document.getElementById("modalBeli");
+        var btnBeliPaket = document.getElementById("btnBeliPaket");
+        var closeModalBeli = document.getElementById("closeModalBeli");
+
+        btnBeliPaket.onclick = function() {
+            modalBeli.style.display = "block";
+        }
+
+        closeModalBeli.onclick = function() {
+            modalBeli.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modalBeli) {
+                modalBeli.style.display = "none";
+            }
+        }
+
+        // Script modal untuk Pembelian Paket
+        var modalBeliPaket = document.getElementById("modalBeliPaket");
+        var btnBeliPaketDisini = document.getElementById("btnBeliPaketDisini");
+        var closeModalBeliPaket = document.getElementById("closeModalBeliPaket");
+
+        btnBeliPaketDisini.onclick = function() {
+            modalBeliPaket.style.display = "block";
+        }
+
+        closeModalBeliPaket.onclick = function() {
+            modalBeliPaket.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modalBeliPaket) {
+                modalBeliPaket.style.display = "none";
+            }
+        }
     </script>
 
 </body>
