@@ -1,7 +1,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Paket Siluman - Pembelian</title>
     <style>
         /* Menghilangkan scroll horizontal */
@@ -270,6 +270,7 @@
 
     <div class="container">
         <h2>Pembelian Server Siluman</h2>
+        <p style="font-size: 0.8rem; text-align: center; margin-top: -8px;">Silakan lengkapi informasi di bawah untuk melanjutkan pembelian</p>
 
         <!-- Form Pembelian Server -->
         <form id="hwidForm">
@@ -381,18 +382,20 @@
             <span id="closeModal">&times;</span>
             <div class="modal-section">
                 <h2>Cara Cek HWID/Device ID</h2>
-                <p><strong>Untuk HTTP Custom:</strong> Buka aplikasi, klik garis tiga di pojok kiri atas, scroll ke bawah, klik HWID, lalu klik salin. Tempelkan kode di kolom Kode HWID / Device ID. Seperti pada gambar berikut:</p>
+                <p><strong>Untuk HTTP Custom:</strong> Buka aplikasi, klik <strong>"Garis Tiga"</strong> di pojok kiri atas, scroll ke bawah, klik <strong>"HWID"</strong>, lalu klik <strong>"Salin"</strong>. Tempelkan kode di kolom Kode HWID / Device ID. Seperti pada gambar berikut:</p>
                 <div class="images-container">
-                    <img src="https://i.ibb.co.com/3YDvMLv/Screenshot-2024-09-16-12-50-15-12-8661fb0cac2bd1584058d5e43ee5e019.jpg" alt="Langkah 1 HTTP Custom">
-                    <img src="https://example.com/gambar2.jpg" alt="Langkah 2 HTTP Custom">
-                    <img src="https://example.com/gambar3.jpg" alt="Langkah 3 HTTP Custom">
-                    <img src="https://example.com/gambar4.jpg" alt="Langkah 4 HTTP Custom">
+                    <img src="https://i.ibb.co.com/BPrxnv1/http-1.jpg" alt="Langkah 1 HTTP Custom">
+                    <img src="https://i.ibb.co.com/jvdBXZ2/http-2.jpg" alt="Langkah 2 HTTP Custom">
+                    <img src="https://i.ibb.co.com/3Md4X4q/http-3.jpg" alt="Langkah 3 HTTP Custom">
+                    <img src="https://i.ibb.co.com/54sXQNJ/http-4.jpg" alt="Langkah 4 HTTP Custom">
                 </div>
-                <p><strong>Untuk V2Box:</strong> Buka aplikasi, klik pengaturan, lalu klik tombol salin di samping kodenya. Tempelkan kode di kolom Kode HWID / Device ID. Seperti pada gambar berikut:</p>
+                <br>
+       <br>     <br>
+                <p><strong>Untuk V2Box:</strong> Buka aplikasi, klik <strong>"Pengaturan/Settings"</strong>, lalu klik <strong>"Tombol Salin"</strong> di samping kodenya. Tempelkan kode di kolom Kode HWID / Device ID. Seperti pada gambar berikut:</p>
                 <div class="images-container">
-                    <img src="https://example.com/gambar5.jpg" alt="Langkah 1 V2Box">
-                    <img src="https://example.com/gambar6.jpg" alt="Langkah 2 V2Box">
-                    <img src="https://example.com/gambar7.jpg" alt="Langkah 3 V2Box">
+                    <img src="https://i.ibb.co.com/MR0sjW2/v2box-1.jpg" alt="Langkah 1 V2Box">
+                    <img src="https://i.ibb.co.com/KVNbVq7/v2box-2.jpg" alt="Langkah 2 V2Box">
+                    <img src="https://i.ibb.co.com/NtfSvR6/v2box-3.jpg" alt="Langkah 3 V2Box">
                 </div>
             </div>
         </div>
@@ -430,19 +433,19 @@
             <span id="closeModalBeli">&times;</span>
             <div class="modal-section">
                 <h2>Cara Beli Paket Siluman</h2>
-                <p><strong>Cara 1: Melalui MyTelkomsel:</strong> Buka aplikasi MyTelkomsel, klik beli paket, geser ke kiri, pilih Belajar/Kerja, scroll ke bawah di Pendidikan, dan pilih paket Ketengan Ilmupedia. Seperti gambar berikut:</p>
+                <p><strong>Cara 1: <br>Melalui MyTelkomsel:</strong> <br>Buka aplikasi MyTelkomsel, klik <strong>"Beli Paket"</strong>, geser ke kiri, pilih <strong>"Belajar/Kerja"</strong>, scroll ke bawah di <strong>"Pendidikan"</strong>, klik <strong>Lihat Semua"</strong> dan pilih paket <strong>"Ketengan Ilmupedia"</strong>. Seperti gambar berikut:</p>
                 <div class="images-container">
-                    <img src="https://example.com/gambar7.jpg" alt="Langkah 1 MyTelkomsel">
-                    <img src="https://example.com/gambar8.jpg" alt="Langkah 2 MyTelkomsel">
-                    <img src="https://example.com/gambar9.jpg" alt="Langkah 3 MyTelkomsel">
-                    <img src="https://example.com/gambar10.jpg" alt="Langkah 4 MyTelkomsel">
-                    <img src="https://example.com/gambar11.jpg" alt="Langkah 5 MyTelkomsel">
+                    <img src="https://i.ibb.co.com/NyS04mm/beli-paket-1.jpg" alt="Langkah 1 MyTelkomsel">
+                    <img src="https://i.ibb.co.com/42hqR95/beli-paket-2.jpg" alt="Langkah 2 MyTelkomsel">
+                    <img src="https://i.ibb.co.com/WkFgd25/beli-paket-3.jpg" alt="Langkah 3 MyTelkomsel">
+                    <img src="https://i.ibb.co.com/BLVmWbD/beli-paket-4.jpg" alt="Langkah 4 MyTelkomsel">
+                    <img src="https://i.ibb.co.com/kX8C2Mx/beli-paket-5.jpg" alt="Langkah 5 MyTelkomsel">
                 </div>
-                <p><strong>Cara 2: Melalui kode *363#:</strong> Ketik *363*844#, pilih Paket Ilmupedia, lalu beli paket sesuai kebutuhan Anda. Seperti gambar berikut:</p>
+                <p><strong>Cara 2: <br>Melalui kode *363#:</strong> <br>Ketik <strong>"*363*844#"</strong>, pilih Paket <strong>"3.Ilmupedia"</strong>, lalu beli paket sesuai kebutuhan Anda. Seperti gambar berikut:</p>
                 <div class="images-container">
-                    <img src="https://example.com/gambar12.jpg" alt="Langkah 1 Kode USSD">
-                    <img src="https://example.com/gambar13.jpg" alt="Langkah 2 Kode USSD">
-                    <img src="https://example.com/gambar14.jpg" alt="Langkah 3 Kode USSD">
+                    <img src="https://i.ibb.co.com/RpjVG62/beli-paket-11.jpg" alt="Langkah 1 Kode USSD">
+                    <img src="https://i.ibb.co.com/c8zj8Bc/beli-paket-12.jpg" alt="Langkah 2 Kode USSD">
+                    <img src="https://i.ibb.co.com/gdJ0MHF/beli-paket-13.jpg" alt="Langkah 3 Kode USSD">
                 </div>
             </div>
         </div>
