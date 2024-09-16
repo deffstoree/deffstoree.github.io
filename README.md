@@ -383,7 +383,7 @@
                 <h2>Cara Cek HWID/Device ID</h2>
                 <p><strong>Untuk HTTP Custom:</strong> Buka aplikasi, klik garis tiga di pojok kiri atas, scroll ke bawah, klik HWID, lalu klik salin. Tempelkan kode di kolom Kode HWID / Device ID. Seperti pada gambar berikut:</p>
                 <div class="images-container">
-                    <img src="https://i.ibb.co.com/drZ6hB2/unnamed.png" alt="Langkah 1 HTTP Custom">
+                    <img src="https://i.ibb.co.com/3YDvMLv/Screenshot-2024-09-16-12-50-15-12-8661fb0cac2bd1584058d5e43ee5e019.jpg" alt="Langkah 1 HTTP Custom">
                     <img src="https://example.com/gambar2.jpg" alt="Langkah 2 HTTP Custom">
                     <img src="https://example.com/gambar3.jpg" alt="Langkah 3 HTTP Custom">
                     <img src="https://example.com/gambar4.jpg" alt="Langkah 4 HTTP Custom">
@@ -405,20 +405,21 @@
             <div class="modal-section">
                 <h2>Daftar Harga Paket Siluman</h2>
                 <ul>
-                    <li>1 GB / 1 Hari: Rp1.100 + admin Rp1.900</li>
-                    <li>10 GB / 1 Hari: Rp3.300 + admin Rp1.700</li>
-                    <li>5 GB / 3 Hari: Rp3.300 + admin Rp1.700</li>
-                    <li>11 GB / 3 Hari: Rp5.500 + admin Rp1.500</li>
-                    <li>17 GB / 3 Hari: Rp7.700 + admin Rp2.300</li>
-                    <li>11 GB / 7 Hari: Rp9.300 + admin Rp1.700</li>
-                    <li>17 GB / 7 Hari: Rp11.500 + admin Rp1.500</li>
-                    <li>28 GB / 7 Hari: Rp13.100 + admin Rp1.900</li>
-                    <li>11 GB / 30 Hari: Rp25.000 + admin Rp2.000</li>
-                    <li>22 GB / 30 Hari: Rp40.000 + admin Rp2.000</li>
-                    <li>30 GB / 30 Hari: Rp50.000 (tanpa admin)</li>
+                    <li>1 GB / 1 Hari: Rp1.100 </li>
+                    <li>10 GB / 1 Hari: Rp3.300 </li>
+                    <li>5 GB / 3 Hari: Rp3.300 </li>
+                    <li>11 GB / 3 Hari: Rp5.500 </li>
+                    <li>17 GB / 3 Hari: Rp7.700 </li>
+                    <li>11 GB / 7 Hari: Rp9.300 </li>
+                    <li>17 GB / 7 Hari: Rp11.500 </li>
+                    <li>28 GB / 7 Hari: Rp13.100 </li>
+                    <li>11 GB / 30 Hari: Rp25.000 </li>
+                    <li>22 GB / 30 Hari: Rp40.000 </li>
+                    
                 </ul>
+                <p><strong>Spesial:</strong> 30 GB / 30 Hari: Rp50.000</p>
                 <p><strong>Pembayaran tersedia melalui QRIS atau transfer ke bank pilihan Anda.</strong></p>
-                <p><strong>Spesial:</strong> Pembelian melalui Android hanya Rp10.000/bulan, dan iPhone Rp15.000/bulan.</p>
+               
             </div>
         </div>
     </div>
